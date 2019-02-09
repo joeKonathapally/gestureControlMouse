@@ -6,10 +6,13 @@ Madgwick filter;
 unsigned long microsPerReading, microsPrevious;
 float accelScale, gyroScale;
 
-float prevValues[11];
+float prevYaw[11];
+float prevPitch[11];
+float prevRoll[11];
+int p=0;
 
 
-float findSD(){
+float findSD(float prevValues[]) {
   float total=0.0;
   float totalSquared=0.0;
   for (int x=0;x<11;x++){
@@ -40,7 +43,7 @@ void setup() {
   CurieIMU.setGyroRange(250);
 
   // initialize variables to pace updates to correct rate
-  microsPerReading = 1000000 / 25;
+  microsPerReading = 2000000/ 25;
   microsPrevious = micros();
 }
 
@@ -74,14 +77,33 @@ void loop() {
     roll = filter.getRoll();
     pitch = filter.getPitch();
     heading = filter.getYaw();
+    if(p<11){
+      prevYaw[p]=heading;
+      prevRoll[p]=roll;
+      prevPitch[p]=pitch;
+    }
+    else{
+      Serial.print(findSD(prevYaw));
+      Serial.print(";");
+      Serial.print(findSD(prevPitch));
+      Serial.print(";");
+      Serial.print(findSD(prevRoll));
+      Serial.println();
+      p=0;
+      
+    }
+ 
+    /*
     Serial.print(heading);
     Serial.print(";");
     Serial.print(pitch);
     Serial.print(";");
     Serial.println(roll);
+    */
 
     // increment previous time, so we keep proper pace
     microsPrevious = microsPrevious + microsPerReading;
+    p=p+1;
   }
 }
 
