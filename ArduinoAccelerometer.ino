@@ -10,13 +10,13 @@ float prevValues[11];
 
 
 float findSD(){
-  float total;
-  float totalSquared;
+  float total=0.0;
+  float totalSquared=0.0;
   for (int x=0;x<11;x++){
     total=total+prevValues[x];
   }
   for(int x=0;x<11;x++){
-    totalSquared=prevValues[x]*prevValues[x];
+    totalSquared=totalSquared+(prevValues[x]*prevValues[x]);
   }
   float StandardDev;
   StandardDev=(totalSquared/11)-(((total)/11)*((total)/11));
