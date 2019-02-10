@@ -13,6 +13,7 @@ float diffPitch=0.0;
 float diffRoll=0.0;
 float diffYaw=0.0;
 int p=0;
+int k=0;
 
 
 float findSD(float prevValues[]) {
@@ -54,7 +55,7 @@ void setup() {
 
 void loop() {
   
-  for(int i=0;i<1;i++)
+  if(k<1)
   {
     int aix, aiy, aiz;
     int gix, giy, giz;
@@ -78,6 +79,7 @@ void loop() {
     diffRoll = filter.getRoll();
     diffPitch = filter.getPitch();
     diffYaw = filter.getYaw();
+    k=k+1;
   }
   int aix, aiy, aiz;
   int gix, giy, giz;
