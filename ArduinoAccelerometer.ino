@@ -17,6 +17,7 @@ int k=0;
 int q=0;
 int w=0;
 int e=0;
+int sen=35;
 
 
 float findSD(float prevValues[]) {
@@ -59,7 +60,7 @@ void setup() {
   CurieIMU.setGyroRange(250);
 
   // initialize variables to pace updates to correct rate
-  microsPerReading = 2000000/ 25;
+  microsPerReading = 1000000/ 25;
   microsPrevious = micros();
   
   
@@ -122,43 +123,43 @@ void loop() {
       }
       float yaw = findSD(prevYaw)-diffYaw;
       float pitch = findSD(prevPitch)-diffPitch;
-      if(yaw>35 && findD(prevYaw)<0)
+      if(yaw>sen && findD(prevYaw)<0)
       {
         Serial.print("LEFT");
         Serial.println("");
         q=1;
       }
-      else if(yaw<35 && q==1)
+      else if(yaw<sen && q==1)
       {
         q=0;
       }
-      if(yaw>35 && findD(prevYaw)>0)
+      if(yaw>sen && findD(prevYaw)>0)
       {
         Serial.print("RIGHT");
         Serial.println("");
         q=1;
       }
-      if(yaw<35 && q==1)
+      if(yaw<sen && q==1)
       {
         q=0;
       }
-      if(pitch>35 && findD(prevPitch)>0)
+      if(pitch>sen && findD(prevPitch)>0)
       {
         Serial.print("DOWN");
         Serial.println("");
         w=1;
       }
-      if(pitch<35 && w==1)
+      if(pitch<sen && w==1)
       {
         w=0;
       }
-      if(pitch>35 && findD(prevPitch)<0)
+      if(pitch>sen && findD(prevPitch)<0)
       {
         Serial.print("UP");
         Serial.println("");
         w=1;
       }
-      if(pitch<35 && w==1)
+      if(pitch<sen && w==1)
       {
         w=0;
       }
