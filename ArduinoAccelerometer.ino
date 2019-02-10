@@ -139,6 +139,8 @@ void loop() {
       float pitch = findSD(prevPitch)-diffPitch;
       float yawd= findD(prevYaw)-diffYawd;
       float pitchd = findD(prevPitch)-diffPitchd;
+      float roll = findSD(prevRoll)-diffRoll;
+      float rolld = findS(prevRoll)-diffRolld;
       if(yaw>sen1 && yawd<0)
       {
         Serial.print("LEFT");
@@ -179,9 +181,30 @@ void loop() {
       {
         w=0;
       }
+      if(roll>sen && rolld<0)
+      {
+        Serial.print("RIGHT-CLICK");
+        Serial.println("");
+        e=1;
+      }
+      if(roll<sen && e==1)
+      {
+        e=0;
+      }
+      if(roll>sen && rolld>0)
+      {
+        Serial.print("LEFT-CLICK");
+        Serial.println("");
+        e=1;
+      }
+      if(roll<sen && e==1)
+      {
+        e=0;
+      }
       p=0;
       
     }
+    
  
     /*
     Serial.print(heading);
