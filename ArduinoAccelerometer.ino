@@ -85,7 +85,11 @@ void loop() {
     else{
       diffYaw = filter.getYaw();
     }
-    print(""+diffYaw+";"+diffRoll+";"+diffPitch);
+    Serial.print(diffYaw);
+    Serial.print(";");
+    Serial.print(diffRoll);
+    Serial.print(";");
+    Sreial.println(diffPitch);
     k=k+1;
   }
   int aix, aiy, aiz;
