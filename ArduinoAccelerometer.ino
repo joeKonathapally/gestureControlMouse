@@ -64,7 +64,7 @@ void setup() {
   CurieIMU.setGyroRange(250);
 
   // initialize variables to pace updates to correct rate
-  microsPerReading = 1000000/ 25;
+  microsPerReading = 100000/ 25;
   microsPrevious = micros();
   
   
