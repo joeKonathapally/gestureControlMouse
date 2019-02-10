@@ -145,7 +145,7 @@ void loop() {
         Serial.println("");
         q=1;
       }
-      else if(yaw<sen && q==1)
+      else if(yaw<sen1 && q==1)
       {
         q=0;
       }
@@ -155,7 +155,7 @@ void loop() {
         Serial.println("");
         q=1;
       }
-      if(yaw<sen && q==1)
+      if(yaw<sen1 && q==1)
       {
         q=0;
       }
