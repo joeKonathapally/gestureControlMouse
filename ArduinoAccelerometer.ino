@@ -101,11 +101,11 @@ void loop() {
       else
       {
       }
-      Serial.print(findSD(prevYaw));
+      Serial.print(findSD(prevYaw)-diffYaw);
       Serial.print(";");
       Serial.print(findSD(prevPitch)-diffPitch);
       Serial.print(";");
-      Serial.print(findSD(prevRoll)-diffRoll);
+      Serial.println(findSD(prevRoll)-diffRoll);
       p=0;
       
     }
