@@ -55,7 +55,7 @@ void setup() {
 
 void loop() {
   
-  if(k<1)
+  if(k<10)
   {
     int aix, aiy, aiz;
     int gix, giy, giz;
