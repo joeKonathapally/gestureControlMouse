@@ -78,7 +78,13 @@ void loop() {
     // print the heading, pitch and roll
     diffRoll = filter.getRoll();
     diffPitch = filter.getPitch();
-    diffYaw = filter.getYaw();
+    if(filter.getYaw()<0)
+    {
+      difYaw=(-1)*filter.getYaw();
+    }
+    else{
+      diffYaw = filter.getYaw();
+    }
     k=k+1;
   }
   int aix, aiy, aiz;
