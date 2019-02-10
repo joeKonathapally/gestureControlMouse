@@ -140,7 +140,7 @@ void loop() {
       {
         q=0;
       }
-      if(pitch>35 && findD(prevPitch)<0)
+      if(pitch>35 && findD(prevPitch)>0)
       {
         Serial.println("DOWN");
         w=1;
@@ -149,7 +149,7 @@ void loop() {
       {
         w=0;
       }
-      if(pitch>35 && findD(prevPitch)>0)
+      if(pitch>35 && findD(prevPitch)<0)
       {
         Serial.println("UP");
         w=1;
