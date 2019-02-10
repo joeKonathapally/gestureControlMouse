@@ -30,8 +30,26 @@ float findSD(float prevValues[]) {
   return StandardDev;
 }
 
-
-
+float findSlope(float prevValues[]){
+  float previousvalueminusone=0.0;
+  float previousvalue=0.0;
+  float slope=0.0;
+  int count=0;
+  for(int x=2;x<11;x++){
+    if(prevValues[x-1]>prevValues[x-2]){
+      count=0;
+      previousvalueminusone=prevValues[x-2];
+      previousvalue=prevValues[x-1];
+      count++;
+      continue;
+    }
+    else{
+      count++;
+    }
+  }  
+  slope= (previousvalue-previousvalueminusone)/count;
+  
+}
 void setup() {
   Serial.begin(9600);
 
@@ -54,7 +72,44 @@ void setup() {
 }
 
 void loop() {
- 
+  
+  if(k<1)
+  {
+    int aix, aiy, aiz;
+    int gix, giy, giz;
+    float ax, ay, az;
+    float gx, gy, gz;
+    float roll, pitch, heading;
+  
+    CurieIMU.readMotionSensor(aix, aiy, aiz, gix, giy, giz);
+  
+    ax = convertRawAcceleration(aix);
+    ay = convertRawAcceleration(aiy);
+    az = convertRawAcceleration(aiz);
+    gx = convertRawGyro(gix);
+    gy = convertRawGyro(giy);
+    gz = convertRawGyro(giz);
+
+    // update the filter, which computes orientation
+    filter.updateIMU(gx, gy, gz, ax, ay, az);
+
+    // print the heading, pitch and roll
+    diffRoll = filter.getRoll();
+    diffPitch = filter.getPitch();
+    if(filter.getYaw()<0)
+    {
+      diffYaw=(-1)*filter.getYaw();
+    }
+    else{
+      diffYaw = filter.getYaw();
+    }
+    Serial.print(diffYaw);
+    Serial.print(";");
+    Serial.print(diffRoll);
+    Serial.print(";");
+    Serial.println(diffPitch);
+    k=k+1;
+  }
   int aix, aiy, aiz;
   int gix, giy, giz;
   float ax, ay, az;
@@ -84,16 +139,6 @@ void loop() {
     roll = filter.getRoll();
     pitch = filter.getPitch();
     heading = filter.getYaw();
-    if(k<5)
-    {
-      diffPitch=filter.getPitch();
-      diffYaw=filter.getYaw();
-      diffRoll=filter.getRoll();
-      k=k+1;
-    }
-    else
-    {
-    }
     if(p<11){
       prevYaw[p]=heading;
       prevRoll[p]=roll;
@@ -105,17 +150,7 @@ void loop() {
       Serial.print(findSD(prevPitch)-diffPitch);
       Serial.print(";");
       Serial.print(findSD(prevRoll)-diffRoll);
-      Serial.println("Values");
-      Serial.print(diffYaw);
-      Serial.print(";");
-      Serial.print(diffRoll);
-      Serial.print(";");
-      Serial.println(diffPitch);
-      Serial.print(preYaw[0]);
-      Serial.print(";");
-      Serial.print(preRoll[0]);
-      Serial.print(";");
-      Serial.println(prePitch[0])
+      Serial.println();
       p=0;
       
     }
