@@ -122,7 +122,7 @@ void loop() {
       prevPitch[p]=pitch;
     }
     else{
-      Serial.print(findSD(prevYaw)-diffYaw);
+      Serial.print(findSD(prevYaw));
       Serial.print(";");
       Serial.print(findSD(prevPitch)-diffPitch);
       Serial.print(";");
