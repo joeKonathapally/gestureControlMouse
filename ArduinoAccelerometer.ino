@@ -14,6 +14,9 @@ float diffRoll=0.0;
 float diffYaw=0.0;
 int p=0;
 int k=0;
+int q=0;
+int w=0;
+int e=0;
 
 
 float findSD(float prevValues[]) {
@@ -28,6 +31,15 @@ float findSD(float prevValues[]) {
   float StandardDev;
   StandardDev=(totalSquared/11)-(((total)/11)*((total)/11));
   return StandardDev;
+}
+
+float findD(float prevValues[]){
+  float total=0.0;
+  for(int i=0;i<10;i++){
+    total=total+prevValues[i];
+  }
+  total=total/10;
+  return prevValues[10]-total;
 }
 
 
@@ -108,11 +120,44 @@ void loop() {
       else
       {
       }
-      Serial.print(findSD(prevYaw)-diffYaw);
-      Serial.print(";");
-      Serial.print(findSD(prevPitch)-diffPitch);
-      Serial.print(";");
-      Serial.println(findSD(prevRoll)-diffRoll);
+      yaw = findSD(prevYaw)-diffYaw;
+      pitch = findSD(prevPitch)-diffPitch;
+      if(yaw>35 && findD(prevYaw)<0)
+      {
+        Serial.print("RIGHT");
+        q=1;
+      }
+      else if(yaw<35 && q=1)
+      {
+        q=0;
+      }
+      if(yaw>35 && findD(prevYaw)>0)
+      {
+        Serial.print("LEFT");
+        q=1;
+      }
+      if(yaw<35 && q=1)
+      {
+        q=0;
+      }
+      if(pitch>35 && findD(prevPitch)<0)
+      {
+        Serial.print("DOWN");
+        w=1;
+      }
+      if(pitch<35 && w=1)
+      {
+        w=0;
+      }
+      if(pitch>35 && findD(prevPitch)<0)
+      {
+        Serial.print("UP");
+        w=1;
+      }
+      if(pitch<35 && w=1)
+      {
+        w=0;
+      }
       p=0;
       
     }
