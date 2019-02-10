@@ -120,8 +120,8 @@ void loop() {
       else
       {
       }
-      yaw = findSD(prevYaw)-diffYaw;
-      pitch = findSD(prevPitch)-diffPitch;
+      float yaw = findSD(prevYaw)-diffYaw;
+      float pitch = findSD(prevPitch)-diffPitch;
       if(yaw>35 && findD(prevYaw)<0)
       {
         Serial.print("RIGHT");
