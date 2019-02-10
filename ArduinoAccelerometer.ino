@@ -71,6 +71,9 @@ void setup() {
   roll = filter.getRoll();
   pitch = filter.getPitch();
   heading = filter.getYaw();
+  diffRoll=roll;
+  diffPitch=pitch;
+  diffYaw=yaw;
 }
 
 void loop() {
@@ -109,11 +112,11 @@ void loop() {
       prevPitch[p]=pitch;
     }
     else{
-      Serial.print(findSD(prevYaw));
+      Serial.print(findSD(prevYaw)-diffYaw);
       Serial.print(";");
-      Serial.print(findSD(prevPitch));
+      Serial.print(findSD(prevPitch)-diffPitch);
       Serial.print(";");
-      Serial.print(findSD(prevRoll));
+      Serial.print(findSD(prevRoll)-diffRoll);
       Serial.println();
       p=0;
       
