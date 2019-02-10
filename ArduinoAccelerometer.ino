@@ -85,6 +85,7 @@ void loop() {
     else{
       diffYaw = filter.getYaw();
     }
+    print(""+diffYaw+";"+diffRoll+";"+diffPitch);
     k=k+1;
   }
   int aix, aiy, aiz;
