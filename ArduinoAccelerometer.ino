@@ -9,6 +9,9 @@ float accelScale, gyroScale;
 float prevYaw[11];
 float prevPitch[11];
 float prevRoll[11];
+float diffPitch=0.0;
+float diffRoll=0.0;
+float diffYaw=0.0;
 int p=0;
 
 
@@ -45,6 +48,29 @@ void setup() {
   // initialize variables to pace updates to correct rate
   microsPerReading = 2000000/ 25;
   microsPrevious = micros();
+  
+  int aix, aiy, aiz;
+  int gix, giy, giz;
+  float ax, ay, az;
+  float gx, gy, gz;
+  float roll, pitch, heading;
+  
+  CurieIMU.readMotionSensor(aix, aiy, aiz, gix, giy, giz);
+  
+  ax = convertRawAcceleration(aix);
+  ay = convertRawAcceleration(aiy);
+  az = convertRawAcceleration(aiz);
+  gx = convertRawGyro(gix);
+  gy = convertRawGyro(giy);
+  gz = convertRawGyro(giz);
+
+    // update the filter, which computes orientation
+  filter.updateIMU(gx, gy, gz, ax, ay, az);
+
+    // print the heading, pitch and roll
+  roll = filter.getRoll();
+  pitch = filter.getPitch();
+  heading = filter.getYaw();
 }
 
 void loop() {
