@@ -84,7 +84,7 @@ void loop() {
     roll = filter.getRoll();
     pitch = filter.getPitch();
     heading = filter.getYaw();
-    if(k<1)
+    if(k<5)
     {
       diffPitch=filter.getPitch();
       diffYaw=filter.getYaw();
