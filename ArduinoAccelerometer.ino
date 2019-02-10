@@ -49,31 +49,36 @@ void setup() {
   microsPerReading = 2000000/ 25;
   microsPrevious = micros();
   
-  int aix, aiy, aiz;
-  int gix, giy, giz;
-  float ax, ay, az;
-  float gx, gy, gz;
-  float roll, pitch, heading;
   
-  CurieIMU.readMotionSensor(aix, aiy, aiz, gix, giy, giz);
-  
-  ax = convertRawAcceleration(aix);
-  ay = convertRawAcceleration(aiy);
-  az = convertRawAcceleration(aiz);
-  gx = convertRawGyro(gix);
-  gy = convertRawGyro(giy);
-  gz = convertRawGyro(giz);
-
-    // update the filter, which computes orientation
-  filter.updateIMU(gx, gy, gz, ax, ay, az);
-
-    // print the heading, pitch and roll
-  diffRoll = filter.getRoll();
-  diffPitch = filter.getPitch();
-  diffYaw = filter.getYaw();
 }
 
 void loop() {
+  
+  for(int i=0;i<1;i++)
+  {
+    int aix, aiy, aiz;
+    int gix, giy, giz;
+    float ax, ay, az;
+    float gx, gy, gz;
+    float roll, pitch, heading;
+  
+    CurieIMU.readMotionSensor(aix, aiy, aiz, gix, giy, giz);
+  
+    ax = convertRawAcceleration(aix);
+    ay = convertRawAcceleration(aiy);
+    az = convertRawAcceleration(aiz);
+    gx = convertRawGyro(gix);
+    gy = convertRawGyro(giy);
+    gz = convertRawGyro(giz);
+
+    // update the filter, which computes orientation
+    filter.updateIMU(gx, gy, gz, ax, ay, az);
+
+    // print the heading, pitch and roll
+    diffRoll = filter.getRoll();
+    diffPitch = filter.getPitch();
+    diffYaw = filter.getYaw();
+  }
   int aix, aiy, aiz;
   int gix, giy, giz;
   float ax, ay, az;
