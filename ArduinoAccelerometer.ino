@@ -80,7 +80,7 @@ void loop() {
     diffPitch = filter.getPitch();
     if(filter.getYaw()<0)
     {
-      difYaw=(-1)*filter.getYaw();
+      diffYaw=(-1)*filter.getYaw();
     }
     else{
       diffYaw = filter.getYaw();
