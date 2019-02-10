@@ -91,6 +91,9 @@ void loop() {
       diffRoll=filter.getRoll();
       k=k+1;
     }
+    else
+    {
+    }
     if(p<11){
       prevYaw[p]=heading;
       prevRoll[p]=roll;
@@ -102,12 +105,17 @@ void loop() {
       Serial.print(findSD(prevPitch)-diffPitch);
       Serial.print(";");
       Serial.print(findSD(prevRoll)-diffRoll);
-      Serial.println();
+      Serial.println("Values");
       Serial.print(diffYaw);
       Serial.print(";");
       Serial.print(diffRoll);
       Serial.print(";");
       Serial.println(diffPitch);
+      Serial.print(preYaw[0]);
+      Serial.print(";");
+      Serial.print(preRoll[0]);
+      Serial.print(";");
+      Serial.println(prePitch[0])
       p=0;
       
     }
