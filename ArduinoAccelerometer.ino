@@ -9,9 +9,6 @@ float accelScale, gyroScale;
 float prevYaw[11];
 float prevPitch[11];
 float prevRoll[11];
-float diffPitch=0.0;
-float diffRoll=0.0;
-float diffYaw=0.0;
 int p=0;
 
 
@@ -20,8 +17,6 @@ float findSD(float prevValues[]) {
   float totalSquared=0.0;
   for (int x=0;x<11;x++){
     total=total+prevValues[x];
-  }
-  for(int x=0;x<11;x++){
     totalSquared=totalSquared+(prevValues[x]*prevValues[x]);
   }
   float StandardDev;
@@ -29,8 +24,26 @@ float findSD(float prevValues[]) {
   return StandardDev;
 }
 
+float findSDofSD(float StandardDev){
+  float totalsd=0;
+  float totsqrd=0;
 
-
+  int max=0;
+  int min=0;
+  for(int x=0; x<11; x++){
+    while(prevValues[x]>max){
+      max=prevValues[x];
+      totalsd+=standardDev;
+      totalsqrd+=(standardDev*standardDev); 
+    }
+  }
+  float SDSD;
+  SDSD = (totalsqrd/11)-((totalsd/11)^2);
+  return SDSD;
+  
+}
+        
+        
 void setup() {
   Serial.begin(9600);
 
@@ -48,29 +61,6 @@ void setup() {
   // initialize variables to pace updates to correct rate
   microsPerReading = 2000000/ 25;
   microsPrevious = micros();
-  
-  int aix, aiy, aiz;
-  int gix, giy, giz;
-  float ax, ay, az;
-  float gx, gy, gz;
-  float roll, pitch, heading;
-  
-  CurieIMU.readMotionSensor(aix, aiy, aiz, gix, giy, giz);
-  
-  ax = convertRawAcceleration(aix);
-  ay = convertRawAcceleration(aiy);
-  az = convertRawAcceleration(aiz);
-  gx = convertRawGyro(gix);
-  gy = convertRawGyro(giy);
-  gz = convertRawGyro(giz);
-
-    // update the filter, which computes orientation
-  filter.updateIMU(gx, gy, gz, ax, ay, az);
-
-    // print the heading, pitch and roll
-  roll = filter.getRoll();
-  pitch = filter.getPitch();
-  heading = filter.getYaw();
 }
 
 void loop() {
