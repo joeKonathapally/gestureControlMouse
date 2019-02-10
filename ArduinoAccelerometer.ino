@@ -127,7 +127,7 @@ void loop() {
         Serial.print("RIGHT");
         q=1;
       }
-      else if(yaw<35 && q=1)
+      else if(yaw<35 && q==1)
       {
         q=0;
       }
@@ -136,7 +136,7 @@ void loop() {
         Serial.print("LEFT");
         q=1;
       }
-      if(yaw<35 && q=1)
+      if(yaw<35 && q==1)
       {
         q=0;
       }
@@ -145,7 +145,7 @@ void loop() {
         Serial.print("DOWN");
         w=1;
       }
-      if(pitch<35 && w=1)
+      if(pitch<35 && w==1)
       {
         w=0;
       }
@@ -154,7 +154,7 @@ void loop() {
         Serial.print("UP");
         w=1;
       }
-      if(pitch<35 && w=1)
+      if(pitch<35 && w==1)
       {
         w=0;
       }
