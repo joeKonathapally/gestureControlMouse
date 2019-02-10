@@ -140,7 +140,7 @@ void loop() {
       float yawd= findD(prevYaw)-diffYawd;
       float pitchd = findD(prevPitch)-diffPitchd;
       float roll = findSD(prevRoll)-diffRoll;
-      float rolld = findS(prevRoll)-diffRolld;
+      float rolld = findD(prevRoll)-diffRolld;
       if(yaw>sen1 && yawd<0)
       {
         Serial.print("LEFT");
