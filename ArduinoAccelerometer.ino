@@ -70,7 +70,7 @@ void setup() {
     // print the heading, pitch and roll
   diffRoll = filter.getRoll();
   diffPitch = filter.getPitch();
-  diffHeading = filter.getYaw();
+  diffYaw = filter.getYaw();
 }
 
 void loop() {
