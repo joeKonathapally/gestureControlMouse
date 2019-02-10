@@ -12,6 +12,9 @@ float prevRoll[11];
 float diffPitch=0.0;
 float diffRoll=0.0;
 float diffYaw=0.0;
+float diffPitchd=0.0;
+float diffRolld=0.0;
+float diffYawd=0.0;
 int p=0;
 int k=0;
 int q=0;
@@ -108,6 +111,7 @@ void loop() {
       if(k<1)
       {
         diffPitch=findSD(prevPitch);
+        diffPitchd=findD(prevPitch);
         if(findSD(prevYaw)<0)
         {
           diffYaw=(-1)*findSD(prevYaw);
@@ -116,7 +120,16 @@ void loop() {
         {
           diffYaw=findSD(prevYaw);
         }
+        if(findD(prevYaw)<0)
+        {
+          diffYawd=(-1)*findD(prevYaw);
+        }
+        else
+        {
+          diffYawd=findD(prevYaw);
+        }
         diffRoll=findSD(prevRoll);
+        diffRolld=findD(prevRoll);
         k=k+1;
       }
       else
@@ -124,7 +137,9 @@ void loop() {
       }
       float yaw = findSD(prevYaw)-diffYaw;
       float pitch = findSD(prevPitch)-diffPitch;
-      if(yaw>sen1 && findD(prevYaw)<0)
+      float yawd= findD(prevYaw)-diffYawd;
+      float pitchd = findD(prevPitch)-diffPitchd;
+      if(yaw>sen1 && yawd<0)
       {
         Serial.print("LEFT");
         Serial.println("");
@@ -134,7 +149,7 @@ void loop() {
       {
         q=0;
       }
-      if(yaw>sen1 && findD(prevYaw)>0)
+      if(yaw>sen1 && yawd>0)
       {
         Serial.print("RIGHT");
         Serial.println("");
@@ -144,7 +159,7 @@ void loop() {
       {
         q=0;
       }
-      if(pitch>sen && findD(prevPitch)>0)
+      if(pitch>sen && pitchd>0)
       {
         Serial.print("DOWN");
         Serial.println("");
@@ -154,7 +169,7 @@ void loop() {
       {
         w=0;
       }
-      if(pitch>sen && findD(prevPitch)<0)
+      if(pitch>sen && pitchd<0)
       {
         Serial.print("UP");
         Serial.println("");
