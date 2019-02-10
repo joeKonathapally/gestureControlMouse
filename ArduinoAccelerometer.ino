@@ -111,11 +111,11 @@ void loop() {
       Serial.print(diffRoll);
       Serial.print(";");
       Serial.println(diffPitch);
-      Serial.print(preYaw[0]);
+      Serial.print(prevYaw[0]);
       Serial.print(";");
-      Serial.print(preRoll[0]);
+      Serial.print(prevRoll[0]);
       Serial.print(";");
-      Serial.println(prePitch[0])
+      Serial.println(prevPitch[0]);
       p=0;
       
     }
