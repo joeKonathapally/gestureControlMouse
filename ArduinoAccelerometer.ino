@@ -124,7 +124,8 @@ void loop() {
       float pitch = findSD(prevPitch)-diffPitch;
       if(yaw>35 && findD(prevYaw)<0)
       {
-        Serial.println("LEFT");
+        Serial.print("LEFT");
+        Serial.println("");
         q=1;
       }
       else if(yaw<35 && q==1)
@@ -133,7 +134,8 @@ void loop() {
       }
       if(yaw>35 && findD(prevYaw)>0)
       {
-        Serial.println("RIGHT");
+        Serial.print("RIGHT");
+        Serial.println("");
         q=1;
       }
       if(yaw<35 && q==1)
@@ -142,7 +144,8 @@ void loop() {
       }
       if(pitch>35 && findD(prevPitch)>0)
       {
-        Serial.println("DOWN");
+        Serial.print("DOWN");
+        Serial.println("");
         w=1;
       }
       if(pitch<35 && w==1)
@@ -151,7 +154,8 @@ void loop() {
       }
       if(pitch>35 && findD(prevPitch)<0)
       {
-        Serial.println("UP");
+        Serial.print("UP");
+        Serial.println("");
         w=1;
       }
       if(pitch<35 && w==1)
