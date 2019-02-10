@@ -133,6 +133,11 @@ void loop() {
       Serial.print(";");
       Serial.print(findSD(prevRoll)-diffRoll);
       Serial.println();
+      Serial.print(diffYaw);
+      Serial.print(";");
+      Serial.print(diffRoll);
+      Serial.print(";");
+      Serial.println(diffPitch);
       p=0;
       
     }
