@@ -94,7 +94,14 @@ void loop() {
       if(k<1)
       {
         diffPitch=findSD(prevPitch);
-        diffYaw=findSD(prevYaw);
+        if(findSD(prevYaw)<0)
+        {
+          diffYaw=(-1)*findSD(prevYaw);
+        }
+        else
+        {
+          diffYaw=findSD(prevYaw);
+        }
         diffRoll=findSD(prevRoll);
         k=k+1;
       }
