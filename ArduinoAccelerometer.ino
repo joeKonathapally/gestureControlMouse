@@ -105,17 +105,6 @@ void loop() {
       Serial.print(findSD(prevPitch)-diffPitch);
       Serial.print(";");
       Serial.print(findSD(prevRoll)-diffRoll);
-      Serial.println("Values");
-      Serial.print(diffYaw);
-      Serial.print(";");
-      Serial.print(diffRoll);
-      Serial.print(";");
-      Serial.println(diffPitch);
-      Serial.print(prevYaw[0]);
-      Serial.print(";");
-      Serial.print(prevRoll[0]);
-      Serial.print(";");
-      Serial.println(prevPitch[0]);
       p=0;
       
     }
