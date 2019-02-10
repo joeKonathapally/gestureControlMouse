@@ -18,6 +18,7 @@ int q=0;
 int w=0;
 int e=0;
 int sen=35;
+int sen1=45;
 
 
 float findSD(float prevValues[]) {
@@ -123,7 +124,7 @@ void loop() {
       }
       float yaw = findSD(prevYaw)-diffYaw;
       float pitch = findSD(prevPitch)-diffPitch;
-      if(yaw>sen && findD(prevYaw)<0)
+      if(yaw>sen1 && findD(prevYaw)<0)
       {
         Serial.print("LEFT");
         Serial.println("");
@@ -133,7 +134,7 @@ void loop() {
       {
         q=0;
       }
-      if(yaw>sen && findD(prevYaw)>0)
+      if(yaw>sen1 && findD(prevYaw)>0)
       {
         Serial.print("RIGHT");
         Serial.println("");
