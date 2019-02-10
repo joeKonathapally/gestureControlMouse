@@ -89,7 +89,7 @@ void loop() {
     Serial.print(";");
     Serial.print(diffRoll);
     Serial.print(";");
-    Sreial.println(diffPitch);
+    Serial.println(diffPitch);
     k=k+1;
   }
   int aix, aiy, aiz;
